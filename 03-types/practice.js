@@ -1,6 +1,7 @@
 // Write a function called isDivisibleBy3 which returns `true` if a number is
 // divisible by 3, and `false` otherwise.
-var isDivisibleBy3 = function () {
+var isDivisibleBy3 = function (value) {
+    return value %3===0;
 };
 
 
@@ -10,10 +11,12 @@ var isDivisibleBy3 = function () {
 // convert the other way, you subtract 32, and then multiply by
 // 5. Finally, you divide by 9. The division operator in JavaScript is
 // `/`.
-var celsToFahr = function () {
+var celsToFahr = function (value) {
+    return ((value*9)/5+32);
 };
 
-var fahrToCels = function () {
+var fahrToCels = function (value) {
+    return (value-32)*5/9;
 };
 
 
@@ -31,7 +34,8 @@ var fahrToCels = function () {
 //
 //     randUpTo(1000);
 //     //=> 236
-var randUpTo = function () {
+var randUpTo = function (value) {
+    
 };
 
 
