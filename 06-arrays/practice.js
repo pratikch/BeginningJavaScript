@@ -14,7 +14,21 @@
 //     containsTwice(10, [10, 10, 10, 10, 10]);
 //     //=> false
 //
-var containsTwice = function () {
+var containsTwice = function (pivot, values) {
+    var result = false;
+    if(!Array.isArray(values)){
+        return result;
+    }
+    var count = 0;
+    for(var index=0; index<values.length; index++){
+        if(values[index]===pivot){
+            count++;
+        }
+    }
+    if(count===2){
+        result = true;
+    }
+    return result;
 };
 
 
@@ -30,7 +44,22 @@ var containsTwice = function () {
 //     containsNTimes(0, 5, [ 1, 2, 3, 4, 5 ]);
 //     //=> false
 //
-var containsNTimes = function () {
+var containsNTimes = function (a, b, values) {
+    var result = false;
+    if(!Array.isArray(values)){
+        return result;
+    }
+    var count = 0;
+    for(var index=0; index<values.length; index++){
+        if(values[index]===b){
+            count++;
+        }
+    }
+    if(count===a){
+        result = true;
+    }
+    return result;
+    
 };
 
 
@@ -50,7 +79,22 @@ var containsNTimes = function () {
 //     atLeastOneEven("hello");
 //     //=> input should be an array!
 //
-var atLeastOneEven = function () {
+var atLeastOneEven = function (values) {
+    var result = false;
+    if(!Array.isArray(values)){
+        throw "exception";
+    }
+    var count = 0;
+    for(var index=0; index<values.length; index++){
+        if(values[index]%2===0){
+            count++;
+        }
+    }
+    if(count>0){
+        result = true;
+    }
+    return result;
+    
 };
 
 
@@ -70,7 +114,22 @@ var atLeastOneEven = function () {
 // Although the tests will not be checking for this, try to make your loop exit
 // as soon as it finds a non-string entry in the array.
 //
-var allStrings = function () {
+var allStrings = function (values) {
+    var result = false;
+    if(!Array.isArray(values)){
+        throw "exception";
+    }
+    var count = 0;
+    for(var index=0; index<values.length; index++){
+        if((typeof values[index])==="string"){
+            count++;
+        }
+    }
+    if(count===values.length){
+        result = true;
+    }
+
+    return result;
 };
 
 
@@ -96,7 +155,18 @@ var allStrings = function () {
 // as soon as it finds an element in the first array that appears twice in the second
 // array.
 //
-var containsAnyTwice = function () {
+var containsAnyTwice = function (array1, array2) {
+    var result = false;
+    if(!Array.isArray(array1) || !Array.isArray(array2)){
+       throw "Exception";
+    }
+    for(var index=0; index<array1.length; index++){
+        if(containsNTimes(2, array1[index], array2)){
+            result = true;
+            break;
+        }
+    }
+    return result;
 };
 
 
@@ -125,7 +195,17 @@ var containsAnyTwice = function () {
 //     getValuesAppearingTwice(["hello", "world", "goodbye"])
 //     //=> []
 //
-var getValuesAppearingTwice = function () {
+var getValuesAppearingTwice = function (values) {
+    var result = [];
+    if(!Array.isArray(values)){
+       throw "Exception";
+    }
+    for(var index=0; index<values.length; index++){
+        if(containsTwice(values[index], values) && result.indexOf(values[index])===-1){
+            result.push(values[index]);   
+        }
+    }
+    return result;
 };
 
 
@@ -148,7 +228,20 @@ var getValuesAppearingTwice = function () {
 //     range("hello", "world");
 //     //=> arguments to range must be numbers
 //
-var range = function () {
+var range = function (begin, end) {
+    var result = [];
+    if(typeof begin !== "number" || typeof end !== "number"){
+        throw "exception";
+    }
+    var increment = 1;
+    if(end<begin){
+        increment = -1;
+    }
+    for(var index=begin; index!==end; index=index+increment){
+        result.push(index);
+    }
+    result.push(end);
+    return result;
 };
 
 
