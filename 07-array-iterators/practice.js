@@ -8,7 +8,11 @@
 //      reverse([ "hello", "world" ]);
 //      //=> [ "world", "hello" ]
 //
-var reverse = function () {
+var reverse = function (values) {
+    var result = values.reduce(function(reduced, element){
+        return [element].concat(reduced);
+    },[]);
+    return result;
 };
 
 // Did you know that you could have arrays within arrays? This is perfectly
@@ -39,7 +43,42 @@ var reverse = function () {
 //
 // You'll also want to use the `concat` method to make this work.
 //
-var flatten = function () {
+var flatten = function (values) {
+    
+    var result = values.reduce(function(flatArray, current){
+       return flatArray.concat(current); 
+    },[]);
+    return result;
+    
+};
+
+var range = function (numA, numB) {
+    if (typeof numA !== "number" || typeof numB !== "number") {
+        throw "arguments to range must be numbers";
+    }
+
+    var increment;
+    var i;
+    var result = [];
+
+    if (numA <= numB) {
+        // we're going up!
+        increment = 1;
+    } else {
+        // we're going down!
+        increment = -1;
+    }
+
+    // here we keep going, either up or down, until we hit
+    // numB
+    for (i = numA; i !== numB; i = i + increment) {
+        result.push(i);
+    }
+
+    // we'll skip numB in the above loop, so we'll push it here.
+    result.push(numB);
+
+    return result;
 };
 
 // Using `range` and a chain of array methods, write a function that accepts a
@@ -55,7 +94,13 @@ var flatten = function () {
 //     sumOfMultiplesOf3And5(0);
 //     //=> 0
 //
-var sumOfMultiplesOf3And5 = function () {
+var sumOfMultiplesOf3And5 = function (limit) {
+    var result = range(0, limit).filter(function(number){
+        return number%3===0 || number%5===0;
+    }).reduce(function(sum, current){
+        return sum = sum + current;
+    });
+    return result;
 };
 
 // Write a function called atLeastOneVowel that accepts a string and
@@ -71,7 +116,11 @@ var sumOfMultiplesOf3And5 = function () {
 //     atLeastOneVowel("sdfjkl");
 //     //=> false
 //
-var atLeastOneVowel = function () {
+var atLeastOneVowel = function (word) {
+    return word.toLowerCase().split("").some(function(value){
+        return value === "a" || value ==="e" || value ==="i" || value==="o" || value==="u";
+    });
+    
 };
 
 // Write a function that accepts a list of tweets, and returns the
@@ -84,7 +133,15 @@ var atLeastOneVowel = function () {
 //     longestAwesomeTweet([ "hello", "world" ]);
 //     //=> ""
 //
-var longestAwesomeTweet = function () {
+var longestAwesomeTweet = function (tweets) {
+    return longestTweet = tweets.reduce(function(longestSoFar, currentValue){
+        if(currentValue.length > longestSoFar.length){
+            if(currentValue.indexOf("awesome")>-1){
+                longestSoFar = currentValue;
+            }
+        }
+        return longestSoFar;
+    },"");
 };
 
 // Write a function that accepts an array of HTMLElements and returns an
